@@ -1,5 +1,8 @@
 package allura.challenge.foro.domain.topico;
 
+import allura.challenge.foro.domain.curso.Curso;
+import allura.challenge.foro.domain.usuario.Usuario;
+
 import java.time.LocalDateTime;
 
 public record DatosTopico(
@@ -7,7 +10,7 @@ public record DatosTopico(
   String mensaje,
   LocalDateTime fecha,
   Estatus estatus,
-  Long idUsuario,
-  String curso
+  Usuario idUsuario,
+  Curso idCurso
 ) {
 }
