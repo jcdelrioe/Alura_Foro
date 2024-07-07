@@ -27,4 +27,8 @@ public class Usuario {
     this.usuario = datosUsuario.usuario();
     this.clave = datosUsuario.clave();
   }
+
+  public Usuario(Long id) {
+    this.id = getId();
+  }
 }
