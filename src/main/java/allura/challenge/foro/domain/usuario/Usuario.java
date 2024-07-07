@@ -20,4 +20,11 @@ public class Usuario {
   private String email;
   private String usuario;
   private String clave;
+
+  public Usuario(DatosUsuario datosUsuario) {
+    this.nombre = datosUsuario.nombre();
+    this.email = datosUsuario.email();
+    this.usuario = datosUsuario.usuario();
+    this.clave = datosUsuario.clave();
+  }
 }
