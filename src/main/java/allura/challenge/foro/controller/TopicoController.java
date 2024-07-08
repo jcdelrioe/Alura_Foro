@@ -3,6 +3,7 @@ package allura.challenge.foro.controller;
 import allura.challenge.foro.domain.topico.DatosTopico;
 import allura.challenge.foro.domain.topico.Topico;
 import allura.challenge.foro.domain.topico.TopicoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,8 @@ public class TopicoController {
   private TopicoRepository topicoRepository;
 
   @PostMapping
-  public void registrarTopico(@RequestBody DatosTopico datosTopico){
+  public void registrarTopico(@RequestBody @Valid DatosTopico datosTopico){
+    System.out.println(datosTopico);
     topicoRepository.save(new Topico(datosTopico));
   }
 }

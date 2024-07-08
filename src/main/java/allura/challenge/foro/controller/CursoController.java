@@ -3,6 +3,7 @@ package allura.challenge.foro.controller;
 import allura.challenge.foro.domain.curso.Curso;
 import allura.challenge.foro.domain.curso.CursoRepository;
 import allura.challenge.foro.domain.curso.DatosCurso;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ public class CursoController {
   private CursoRepository cursoRepository;
 
   @PostMapping
-  public void registrarCurso(@RequestBody DatosCurso datosCurso){
+  public void registrarCurso(@RequestBody @Valid DatosCurso datosCurso){
     cursoRepository.save(new Curso(datosCurso));
   }
 }
