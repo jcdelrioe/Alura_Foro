@@ -1,6 +1,14 @@
 package allura.challenge.foro.domain.curso;
 
 public enum Categoria {
-  PROGRAMACION,
-  SOFTSKILLS
+
+  PROGRAMACION("Programacion"),
+  SOFTSKILLS("Softskills");
+
+  private String categoria;
+
+  Categoria(String categoria){
+    this.categoria = categoria;
+  }
+
 }
