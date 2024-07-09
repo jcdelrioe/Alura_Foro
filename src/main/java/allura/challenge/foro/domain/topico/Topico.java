@@ -26,22 +26,17 @@ public class Topico {
   LocalDateTime fecha;
 
   @Enumerated(EnumType.STRING)
-  Estatus estatus;
+  private Estatus estatus;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "usuario_id")
-  Usuario idUsuario;
+  private Usuario idUsuario;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "curso_id")
-  Curso idCurso;
+  private Curso idCurso;
 
   public Topico(DatosTopico datosTopico) {
-    this.titulo = datosTopico.titulo();
-    this.mensaje = datosTopico.mensaje();
-    this.fecha = datosTopico.fecha();
-    this.estatus = datosTopico.estatus();
-    this.idUsuario = datosTopico.idUsuario();
-    this.idCurso = datosTopico.idCurso();
   }
+
 }
