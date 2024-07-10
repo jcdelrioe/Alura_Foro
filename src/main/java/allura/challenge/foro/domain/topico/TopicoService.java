@@ -3,6 +3,8 @@ package allura.challenge.foro.domain.topico;
 import allura.challenge.foro.domain.curso.CursoRepository;
 import allura.challenge.foro.domain.usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -47,5 +49,10 @@ public class TopicoService {
     URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topicoRet.getId()).toUri();
 
     return ResponseEntity.created(url).body(datosRespuestaTopico);
+  }
+
+  public ResponseEntity<Page> listarTopicos(Pageable paginacion) {
+    return ResponseEntity.ok(topicoRepository.listarTopicos(paginacion)
+      .map(DatosListadoTopico::new));
   }
 }
