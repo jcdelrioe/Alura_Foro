@@ -3,19 +3,17 @@ package allura.challenge.foro.domain.topico;
 import allura.challenge.foro.domain.curso.Curso;
 import allura.challenge.foro.domain.usuario.Usuario;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Table(name = "topicos")
 @Entity(name = "Topico")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class Topico {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,20 +21,29 @@ public class Topico {
 
   private String titulo;
   private String mensaje;
-  LocalDateTime fecha;
+  private LocalDateTime fecha_creacion;
 
   @Enumerated(EnumType.STRING)
   private Estatus estatus;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "usuario_id")
-  private Usuario idUsuario;
-
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne
   @JoinColumn(name = "curso_id")
-  private Curso idCurso;
+  private Curso curso;
+
+  @ManyToOne
+  @JoinColumn(name = "usuario_id")
+  Usuario autor;
 
   public Topico(DatosTopico datosTopico) {
+    this.titulo = datosTopico.titulo();
+    this.mensaje = datosTopico.mensaje();
+
+    LocalDateTime ahora = LocalDateTime.now();
+    DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    String horaFormateada = ahora.format(formateador);
+    this.fecha_creacion = LocalDateTime.parse(horaFormateada, formateador);
+
+    this.estatus = Estatus.ABIERTO;
   }
 
 }

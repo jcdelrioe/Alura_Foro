@@ -1,14 +1,12 @@
 package allura.challenge.foro.domain.usuario;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name = "usuarios")
 @Entity(name = "Usuario")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -28,7 +26,4 @@ public class Usuario {
     this.clave = datosUsuario.clave();
   }
 
-  public Usuario(Long id) {
-    this.id = getId();
-  }
 }
