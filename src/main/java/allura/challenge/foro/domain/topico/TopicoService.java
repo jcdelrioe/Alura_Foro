@@ -55,4 +55,14 @@ public class TopicoService {
     return ResponseEntity.ok(topicoRepository.listarTopicos(paginacion)
       .map(DatosListadoTopico::new));
   }
+
+  public ResponseEntity<DatosListadoTopico> listarDetalleTopicos(Long id) {
+    if(topicoRepository.findById(id).isEmpty()){
+      throw new RuntimeException("Topico no encontrado");
+    }
+    Topico topico = topicoRepository.getReferenceById(id);
+    var datosTopico = new DatosListadoTopico(topico);
+
+    return ResponseEntity.ok(datosTopico);
+  }
 }

@@ -3,6 +3,7 @@ package allura.challenge.foro.controller;
 import allura.challenge.foro.domain.topico.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,5 +28,10 @@ public class TopicoController {
   @GetMapping
   public ResponseEntity<Page> listadoTopicos(@PageableDefault(size = 10)Pageable paginacion){
     return topicoService.listarTopicos(paginacion);
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<DatosListadoTopico> listarDetalleTopico(@PathVariable Long id){
+    return topicoService.listarDetalleTopicos(id);
   }
 }
