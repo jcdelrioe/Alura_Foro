@@ -46,4 +46,21 @@ public class Topico {
     this.estatus = Estatus.ABIERTO;
   }
 
+  public void actualizarDatos(DatosActualizarTopico datosActualizarTopico, Curso curso, Usuario usuario) {
+    if (datosActualizarTopico.titulo() != null){
+      this.titulo = datosActualizarTopico.titulo();
+    }
+    if (datosActualizarTopico.mensaje() != null){
+      this.mensaje = datosActualizarTopico.mensaje();
+    }
+    if(curso != null){
+      this.curso = curso;
+    }
+    if (autor != null){
+      this.autor = autor;
+    }
+    if (datosActualizarTopico.estatus() != null){
+      this.estatus = Estatus.fromString(datosActualizarTopico.estatus());
+    }
+  }
 }

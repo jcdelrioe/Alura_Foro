@@ -10,4 +10,12 @@ public enum Estatus {
     this.estado = estado;
   }
 
+  public static Estatus fromString(String text){
+    for(Estatus estado : Estatus.values()){
+      if(estado.estado.equalsIgnoreCase(text)){
+        return estado;
+      }
+    }
+    throw new IllegalArgumentException("Ningún estado encontrado: " + text);
+  }
 }
