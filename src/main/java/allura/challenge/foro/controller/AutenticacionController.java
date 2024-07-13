@@ -1,6 +1,9 @@
 package allura.challenge.foro.controller;
 
 import allura.challenge.foro.domain.usuario.DatosAutenticacionUsuario;
+import allura.challenge.foro.domain.usuario.Usuario;
+import allura.challenge.foro.infra.security.DatosJWTToken;
+import allura.challenge.foro.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +21,16 @@ public class AutenticacionController {
 
   @Autowired
   private AuthenticationManager authenticationManager;
+
+  @Autowired
+  private TokenService tokenService;
+
   @PostMapping
   public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosAutenticacionUsuario datosAutenticacionUsuario){
-    Authentication token = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.usuario(), datosAutenticacionUsuario.clave());
-    authenticationManager.authenticate(token);
-    return ResponseEntity.ok().build();
+    Authentication authToken = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.usuario(), datosAutenticacionUsuario.clave());
+    var usuarioAutenticado = authenticationManager.authenticate(authToken);
+
+    var JWTtoken = tokenService.generarToken((Usuario) usuarioAutenticado.getPrincipal());
+    return ResponseEntity.ok(new DatosJWTToken(JWTtoken));
   }
 }
